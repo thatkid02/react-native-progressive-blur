@@ -1,11 +1,20 @@
-import {
-  codegenNativeComponent,
-  type ColorValue,
-  type ViewProps,
-} from 'react-native';
+import type { ViewProps } from 'react-native';
+import { requireNativeComponent } from 'react-native';
 
-interface NativeProps extends ViewProps {
-  color?: ColorValue;
+export type BlurDirection =
+  | 'topToBottom'
+  | 'bottomToTop'
+  | 'leftToRight'
+  | 'rightToLeft';
+export type BlurTint = 'default' | 'dark' | 'light';
+
+export interface ProgressiveBlurViewProps extends ViewProps {
+  direction?: BlurDirection;
+  intensity?: number;
+  tint?: BlurTint;
+  locations?: [number, number];
 }
 
-export default codegenNativeComponent<NativeProps>('ProgressiveBlurView');
+export default requireNativeComponent<ProgressiveBlurViewProps>(
+  'ProgressiveBlurView'
+);

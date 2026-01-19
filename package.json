@@ -1,6 +1,6 @@
 {
   "name": "react-native-progressive-blur",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Graident blur for ios only",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
@@ -15,25 +15,19 @@
   "files": [
     "src",
     "lib",
-    "android",
     "ios",
     "cpp",
     "*.podspec",
     "react-native.config.js",
     "!ios/build",
-    "!android/build",
-    "!android/gradle",
-    "!android/gradlew",
-    "!android/gradlew.bat",
-    "!android/local.properties",
     "!**/__tests__",
     "!**/__fixtures__",
     "!**/__mocks__",
     "!**/.*"
   ],
   "scripts": {
-    "example": "yarn workspace react-native-progressive-blur-example",
-    "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
+    "example": "yarn workspace react-native-progressive-blur-example ios",
+    "clean": "del-cli example/ios/build lib",
     "prepare": "bob build",
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
@@ -43,7 +37,8 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "blur",
+    "gradient"
   ],
   "repository": {
     "type": "git",
@@ -109,19 +104,6 @@
       ]
     ]
   },
-  "codegenConfig": {
-    "name": "ProgressiveBlurViewSpec",
-    "type": "all",
-    "jsSrcsDir": "src",
-    "android": {
-      "javaPackageName": "com.progressiveblur"
-    },
-    "ios": {
-      "componentProvider": {
-        "ProgressiveBlurView": "ProgressiveBlurView"
-      }
-    }
-  },
   "prettier": {
     "quoteProps": "consistent",
     "singleQuote": true,
@@ -162,7 +144,7 @@
   },
   "create-react-native-library": {
     "type": "fabric-view",
-    "languages": "kotlin-objc",
+    "languages": "swift",
     "tools": [
       "eslint",
       "jest",
