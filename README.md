@@ -30,17 +30,19 @@ import { ProgressiveBlurView } from 'react-native-progressive-blur';
 
 ## Props
 
-| Prop        | Type                                                               | Default         | Description              |
-| ----------- | ------------------------------------------------------------------ | --------------- | ------------------------ |
-| `direction` | `'topToBottom' \| 'bottomToTop' \| 'leftToRight' \| 'rightToLeft'` | `'topToBottom'` | Blur gradient direction  |
-| `intensity` | `number`                                                           | `50`            | Blur strength (0-100)    |
-| `tint`      | `'default' \| 'light' \| 'dark'`                                   | `'default'`     | Blur style               |
-| `locations` | `[number, number]`                                                 | `[0.0, 1.0]`    | Gradient stops (0.0-1.0) |
-| `style`     | `ViewStyle`                                                        | -               | React Native style       |
+| Prop        | Type                                                               | Default         | Description                                                  |
+| ----------- | ------------------------------------------------------------------ | --------------- | ------------------------------------------------------------ |
+| `direction` | `'topToBottom' \| 'bottomToTop' \| 'leftToRight' \| 'rightToLeft'` | `'topToBottom'` | Blur gradient direction. Omit for uniform blur across view   |
+| `intensity` | `number`                                                           | `50`            | Blur strength (0-100)                                        |
+| `tint`      | `'default' \| 'light' \| 'dark'`                                   | `'default'`     | Blur style                                                   |
+| `locations` | `[number, number]`                                                 | `[0.0, 1.0]`    | Gradient stops (0.0-1.0). Only applies when direction is set |
+| `style`     | `ViewStyle`                                                        | -               | React Native style                                           |
 
-## Example
+## Examples
 
+### Gradient Blur
 
+### Gradient Blur
 
 ```jsx
 function Header({ title }) {
@@ -54,6 +56,26 @@ function Header({ title }) {
         locations={[0.0, 0.8]}
       />
       <Text style={styles.title}>{title}</Text>
+    </View>
+  );
+}
+```
+
+### Uniform Blur
+
+When `direction` is omitted, the entire view is blurred uniformly:
+
+```jsx
+function BlurredOverlay() {
+  return (
+    <View style={styles.container}>
+      <Image source={require('./photo.jpg')} style={styles.image} />
+      <ProgressiveBlurView
+        style={StyleSheet.absoluteFill}
+        intensity={60}
+        tint="light"
+      />
+      <Text style={styles.text}>Uniform blur applied</Text>
     </View>
   );
 }

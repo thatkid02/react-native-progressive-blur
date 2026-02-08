@@ -10,7 +10,7 @@ class ProgressiveBlurView: UIView {
   private var isMounted = false
   
   // React Props
-  private var blurDirection: String = "topToBottom" {
+  private var blurDirection: String? = "topToBottom" {
     didSet {
       if isMounted {
         updateGradientDirection()
@@ -112,6 +112,13 @@ class ProgressiveBlurView: UIView {
   private func setupMask() {
     guard let blurView = blurView else { return }
     
+    // If no direction is specified, apply uniform blur without gradient mask
+    guard blurDirection != nil else {
+      blurView.layer.mask = nil
+      gradientLayer = nil
+      return
+    }
+    
     let gradient = CAGradientLayer()
     gradient.frame = bounds
     gradient.colors = [
@@ -127,9 +134,9 @@ class ProgressiveBlurView: UIView {
   }
   
   private func updateGradientDirection() {
-    guard let gradientLayer = gradientLayer else { return }
+    guard let gradientLayer = gradientLayer, let direction = blurDirection else { return }
     
-    switch blurDirection {
+    switch direction {
     case "bottomToTop":
       gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
       gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
@@ -207,7 +214,7 @@ class ProgressiveBlurView: UIView {
   }
   
   // React Props Setters
-  @objc func setDirection(_ value: String) {
+  @objc func setDirection(_ value: String?) {
     blurDirection = value
   }
   
