@@ -1,6 +1,6 @@
 {
   "name": "react-native-progressive-blur",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Graident blur for ios only",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
